@@ -23,13 +23,28 @@ public class TestController {
     private RabbitTemplate rabbitTemplate;
 
     @ApiOperation(value = "发送广播消息", notes = "发送广播消息")
-    @GetMapping(value = "private/test")
-    @Transactional(transactionManager = "",rollbackFor = Exception.class)
-    public String run(
+    @GetMapping(value = "private/test1")
+    public String publishMessage1(
             @RequestParam("name")String name
     ) {
         rabbitTemplate.convertAndSend("MyTest-fanout", null,name);
-        int b = 100/0;
         return "success";
     }
+    @ApiOperation(value = "发送直连消息", notes = "发送直连消息")
+    @GetMapping(value = "private/test2")
+    public String publishMessage2(
+            @RequestParam("name")String name
+    ) {
+        rabbitTemplate.convertAndSend("MyTest-direct", "queue-1",name);
+        return "success";
+    }
+    @ApiOperation(value = "发送广播消息", notes = "发送广播消息")
+    @GetMapping(value = "private/test3")
+    public String publishMessage3(
+            @RequestParam("name")String name
+    ) {
+        rabbitTemplate.convertAndSend("MyTest-topic", "my.topic.A",name);
+        return "success";
+    }
+
 }

@@ -31,22 +31,9 @@ public class RabbitMqConfig {
             log.error("ReturnCallback:     " + "消息：" + returned.getMessage());
             log.error("ReturnCallback:     " + "回应码：" + returned.getReplyCode());
         });
-//        rabbitTemplate.setReturnCallback(new RabbitTemplate.ReturnCallback() {
-//            @Override
-//            public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String routingKey) {
-//                log.error("ReturnCallback:     " + "消息：" + message);
-//                log.error("ReturnCallback:     " + "回应码：" + replyCode);
-//                log.error("ReturnCallback:     " + "回应信息：" + replyText);
-//                log.error("ReturnCallback:     " + "交换机：" + exchange);
-//                log.error("ReturnCallback:     " + "路由键：" + routingKey);
-//            }
-//        });
 
         return rabbitTemplate;
     }
-//    @Bean("rabbitTransactionManager")
-//    RabbitTransactionManager rabbitTransactionManager(ConnectionFactory connectionFactory){
-//        return new RabbitTransactionManager(connectionFactory);
-//    }
+
 
 }

@@ -46,5 +46,16 @@ public class TestController {
         rabbitTemplate.convertAndSend("MyTest-topic", "my.topic.A",name);
         return "success";
     }
+    @ApiOperation(value = "连续发送消息", notes = "连续发送消息")
+    @GetMapping(value = "private/test4")
+    public String publishMessage(
+            @RequestParam("name")String name
+    ) {
+        for (int i = 0; i < 10; i++) {
+            rabbitTemplate.convertAndSend("ex-topic-4", "ex-topic-4-rk",i+1+"");
+        }
+        return "success";
+    }
+
 
 }

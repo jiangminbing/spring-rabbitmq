@@ -1,3 +1,53 @@
+<<<<<<< HEAD
+spring:
+  rabbitmq:
+    host: 10.123.35.161
+    port: 5672
+    username: admin
+    password: admin123
+    virtual-host: /vmsdms
+    #消息确认配置项
+    #确认消息已发送到交换机(Exchange)
+    publisher-confirms: true
+    #确认消息已发送到队列(Queue)
+    publisher-returns: true
+    listener:
+      simple:
+        acknowledge-mode: manual #消费手动确认
+        concurrency: 2  #每个listener在初始化的时候设置的并发消费者的个数
+#        prefetch: 4  #每次从一次性从broker里面取的待消费的消息的个数，0 是轮询模式 1是公平模式
+        retry:
+          enabled: true   # 允许消息消费失败的重试
+          max-attempts: 3   # 消息最多消费次数3次
+          initial-interval: 2000    # 消息多次消费的间隔2秒
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  servlet:
+    multipart:
+      maxFileSize: -1
+      maxRequestSize: -1
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.upload-path}
+  mvc:
+    static-path-pattern: /**
+    pathmatch:
+      matching-strategy: ant_path_matcher
+#忽略权限拦截，外部系统，例如springboot admin 和mq刷新配置都需要权限
+management:
+  endpoints:
+    web:
+      exposure:
+        #开放所有页面节点  默认只开启了health、info两个节点，注意yml的*要使用双引号
+        include: "*"
+  endpoint:
+    health:
+      #显示健康具体信息  默认不会显示详细信息
+      show-details: ALWAYS
+swagger:
+  basePackage: com.example
+  gitUrl: http://192.168.0.89/gac-nev-monitor-center/nev-monitor-center.git
+=======
 spring:
   rabbitmq:
     host: 10.123.35.161
